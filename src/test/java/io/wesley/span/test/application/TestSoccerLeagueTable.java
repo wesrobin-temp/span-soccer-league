@@ -1,5 +1,6 @@
 package io.wesley.span.test.application;
 
+import io.wesley.span.test.business.ILeagueTableFormatter;
 import io.wesley.span.test.data.SoccerTeam;
 import io.wesley.span.test.data.table.LeagueTableNode;
 import org.testng.Assert;
@@ -19,11 +20,12 @@ public class TestSoccerLeagueTable {
 
    @BeforeMethod
    public void beforeMethod() {
-      testedClass = spy(new SoccerLeagueTable());
-
       team = mock(SoccerTeam.class);
       UUID teamUUID = UUID.randomUUID();
       when(team.getUuid()).thenReturn(teamUUID);
+      ILeagueTableFormatter formatter = mock(ILeagueTableFormatter.class);
+
+      testedClass = spy(new SoccerLeagueTable(formatter));
    }
 
    @AfterMethod
@@ -49,7 +51,7 @@ public class TestSoccerLeagueTable {
    @Test
    public void addNewTeam_givenTeamInTable_doesNothing() {
       // Setup
-      Integer points = 10;
+      Long points = 10L;
       // Give the team some points, so that we make sure the .put(team, 0) method call isn't run
       testedClass.LEAGUE_TABLE.put(team.getUuid().toString(), new LeagueTableNode(team));
       testedClass.LEAGUE_TABLE.get(team.getUuid().toString()).addPoints(points);
@@ -70,7 +72,7 @@ public class TestSoccerLeagueTable {
    @Test
    public void addNewTeam_givenNull_doesNothing() {
       // Setup
-      Integer points = 10;
+      Long points = 10L;
       // Give the team some points, so that we make sure the .put(team, 0) method call isn't run
       testedClass.LEAGUE_TABLE.put(team.getUuid().toString(), new LeagueTableNode(team));
       testedClass.LEAGUE_TABLE.get(team.getUuid().toString()).addPoints(points);
@@ -94,10 +96,10 @@ public class TestSoccerLeagueTable {
       testedClass.LEAGUE_TABLE.put(team.getUuid().toString(), new LeagueTableNode(team));
 
       // Do the thing
-      testedClass.addPoints(team, 15);
+      testedClass.addPoints(team, 15L);
 
       // Verify
-      Assert.assertEquals(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()).getPoints(), new Integer(15));
+      Assert.assertEquals(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()).getPoints(), new Long(15));
    }
 
    @Test
@@ -107,7 +109,7 @@ public class TestSoccerLeagueTable {
       Assert.assertNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
 
       // Do the thing
-      testedClass.addPoints(team, 15);
+      testedClass.addPoints(team, 15L);
 
       // Verify
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 0);

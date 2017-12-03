@@ -14,8 +14,8 @@ public class SoccerMatch {
    private final SoccerTeam homeTeam;
    private final SoccerTeam awayTeam;
 
-   private Integer homeTeamScore = -1;
-   private Integer awayTeamScore = -1;
+   private Long homeTeamScore = -1L;
+   private Long awayTeamScore = -1L;
 
    public SoccerMatch(SoccerTeam homeTeam, SoccerTeam awayTeam) {
       if (homeTeam.equals(awayTeam)) {
@@ -39,19 +39,19 @@ public class SoccerMatch {
       return awayTeam;
    }
 
-   public Integer getHomeTeamScore() {
+   public Long getHomeTeamScore() {
       return homeTeamScore;
    }
 
-   public void setHomeTeamScore(Integer homeTeamScore) {
+   public void setHomeTeamScore(Long homeTeamScore) {
       this.homeTeamScore = homeTeamScore;
    }
 
-   public Integer getAwayTeamScore() {
+   public Long getAwayTeamScore() {
       return awayTeamScore;
    }
 
-   public void setAwayTeamScore(Integer awayTeamScore) {
+   public void setAwayTeamScore(Long awayTeamScore) {
       this.awayTeamScore = awayTeamScore;
    }
 

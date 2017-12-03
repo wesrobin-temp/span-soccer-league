@@ -20,10 +20,11 @@ public class TestPointsManager {
 
    @BeforeMethod
    public void beforeMethod() {
-      soccerLeagueTable = spy(new SoccerLeagueTable());
       team = mock(SoccerTeam.class);
       UUID teamUUID = UUID.randomUUID();
       when(team.getUuid()).thenReturn(teamUUID);
+      ILeagueTableFormatter formatter = mock(ILeagueTableFormatter.class);
+      soccerLeagueTable = spy(new SoccerLeagueTable(formatter));
 
       testedClass = spy(new PointsManager(soccerLeagueTable));
    }
@@ -92,13 +93,13 @@ public class TestPointsManager {
       soccerLeagueTable.addNewTeam(team);
 
       // Pre-assertions
-      Assert.assertEquals(soccerLeagueTable.getScore(team), new Integer(0));
+      Assert.assertEquals(soccerLeagueTable.getScore(team), new Long(0));
 
       // Do the thing
       testedClass.registerWin(team);
 
       // Verify
-      verify(soccerLeagueTable, times(1)).addPoints(eq(team), anyInt());
+      verify(soccerLeagueTable, times(1)).addPoints(eq(team), anyLong());
       Assert.assertEquals(soccerLeagueTable.getScore(team), PointsManager.WIN_POINTS);
    }
 
@@ -108,13 +109,13 @@ public class TestPointsManager {
       soccerLeagueTable.addNewTeam(team);
 
       // Pre-assertions
-      Assert.assertEquals(soccerLeagueTable.getScore(team), new Integer(0));
+      Assert.assertEquals(soccerLeagueTable.getScore(team), new Long(0));
 
       // Do the thing
       testedClass.registerLoss(team);
 
       // Verify
-      verify(soccerLeagueTable, times(1)).addPoints(eq(team), anyInt());
+      verify(soccerLeagueTable, times(1)).addPoints(eq(team), anyLong());
       Assert.assertEquals(soccerLeagueTable.getScore(team), PointsManager.LOSS_POINTS);
 
    }
@@ -125,13 +126,13 @@ public class TestPointsManager {
       soccerLeagueTable.addNewTeam(team);
 
       // Pre-assertions
-      Assert.assertEquals(soccerLeagueTable.getScore(team), new Integer(0));
+      Assert.assertEquals(soccerLeagueTable.getScore(team), new Long(0));
 
       // Do the thing
       testedClass.registerDraw(team);
 
       // Verify
-      verify(soccerLeagueTable, times(1)).addPoints(eq(team), anyInt());
+      verify(soccerLeagueTable, times(1)).addPoints(eq(team), anyLong());
       Assert.assertEquals(soccerLeagueTable.getScore(team), PointsManager.DRAW_POINTS);
    }
 }

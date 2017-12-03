@@ -29,8 +29,8 @@ public class TestMatchManager {
       SoccerTeam homeTeam = new SoccerTeam("homeTeam");
       SoccerTeam awayTeam = new SoccerTeam("awayTeam");
       SoccerMatch match = new SoccerMatch(homeTeam, awayTeam);
-      match.setHomeTeamScore(2);
-      match.setAwayTeamScore(0);
+      match.setHomeTeamScore(2L);
+      match.setAwayTeamScore(0L);
 
       // Do the thing
       int result = matchManager.getResult(match);
@@ -45,8 +45,8 @@ public class TestMatchManager {
       SoccerTeam homeTeam = new SoccerTeam("homeTeam");
       SoccerTeam awayTeam = new SoccerTeam("awayTeam");
       SoccerMatch match = new SoccerMatch(homeTeam, awayTeam);
-      match.setHomeTeamScore(0);
-      match.setAwayTeamScore(2);
+      match.setHomeTeamScore(0L);
+      match.setAwayTeamScore(2L);
 
       // Do the thing
       int result = matchManager.getResult(match);
@@ -61,8 +61,8 @@ public class TestMatchManager {
       SoccerTeam homeTeam = new SoccerTeam("homeTeam");
       SoccerTeam awayTeam = new SoccerTeam("awayTeam");
       SoccerMatch match = new SoccerMatch(homeTeam, awayTeam);
-      match.setHomeTeamScore(2);
-      match.setAwayTeamScore(2);
+      match.setHomeTeamScore(2L);
+      match.setAwayTeamScore(2L);
 
       // Do the thing
       int result = matchManager.getResult(match);

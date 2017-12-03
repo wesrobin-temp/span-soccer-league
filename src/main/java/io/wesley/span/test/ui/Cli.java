@@ -7,8 +7,7 @@ import org.apache.commons.cli.*;
 import java.util.logging.Logger;
 
 public class Cli {
-   private static final Logger log = Logger.getLogger(Cli.class.getName());
-   private String[] args = null;
+   private String[] args;
    private Options options = new Options();
 
    public Cli(String... args) {

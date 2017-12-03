@@ -1,0 +1,14 @@
+io\wesley\span\test\application\IScoreSheetProvider.class
+io\wesley\span\test\business\DefaultLeagueTableFormatter.class
+io\wesley\span\test\business\PointsManager.class
+io\wesley\span\test\data\ScoreSheet.class
+io\wesley\span\test\data\SoccerMatch.class
+io\wesley\span\test\data\table\LeagueTableNode.class
+io\wesley\span\test\ui\SoccerLeague.class
+io\wesley\span\test\application\SoccerTeamFactory.class
+io\wesley\span\test\ui\Cli.class
+io\wesley\span\test\application\SoccerLeagueTable.class
+io\wesley\span\test\data\SoccerTeam.class
+io\wesley\span\test\business\ILeagueTableFormatter.class
+io\wesley\span\test\business\SoccerMatchManager.class
+io\wesley\span\test\application\ScoreSheetFromFileProvider.class

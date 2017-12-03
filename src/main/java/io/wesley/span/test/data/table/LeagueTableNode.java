@@ -6,14 +6,14 @@ import java.util.Objects;
 
 public class LeagueTableNode implements Comparable<LeagueTableNode> {
    private SoccerTeam soccerTeam;
-   private Integer points;
+   private Long points;
 
    public LeagueTableNode(SoccerTeam soccerTeam) {
       this.soccerTeam = soccerTeam;
-      this.points = 0;
+      this.points = 0L;
    }
 
-   public Integer addPoints(Integer points) {
+   public Long addPoints(Long points) {
       this.points = this.points + points;
 
       return this.points;
@@ -23,7 +23,7 @@ public class LeagueTableNode implements Comparable<LeagueTableNode> {
       return soccerTeam;
    }
 
-   public Integer getPoints() {
+   public Long getPoints() {
       return points;
    }
 
@@ -49,8 +49,19 @@ public class LeagueTableNode implements Comparable<LeagueTableNode> {
             '}';
    }
 
+   /**
+    * This CompareTo will sort first on the number of points (highest to lowest) and in the case of a tie, sort
+    * Alphabetically.
+    *
+    * @param o The {@link LeagueTableNode} to compare to.
+    * @return the value {@code 0} if {@code this == o};
+    *         the value {@code -1} if {@code this < o}; and
+    *         the value {@code 1} if {@code this > o}
+    */
    @Override
    public int compareTo(LeagueTableNode o) {
-      return this.points.compareTo(o.getPoints());
+      return this.points.compareTo(o.getPoints()) == 0 ? -1 * this.getSoccerTeam().getTeamName().compareToIgnoreCase(o
+            .soccerTeam
+            .getTeamName()) : this.points.compareTo(o.getPoints());
    }
 }

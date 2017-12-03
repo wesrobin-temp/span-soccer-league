@@ -4,29 +4,30 @@ import io.wesley.span.test.data.ScoreSheet;
 import io.wesley.span.test.data.SoccerMatch;
 import io.wesley.span.test.data.SoccerTeam;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class ScoreSheetFromFileProvider implements IScoreSheetProvider {
-   private String file;
+   private String filePath;
 
-   private static final String MATCH_PATTERN = "\\w+ [0-9]+, ?\\w+ [0-9]+$";
+   private static final String MATCH_PATTERN = "[a-zA-z0-9 ]+ [0-9]+, ?[a-zA-z0-9 ]+ [0-9]+$";
 
    public ScoreSheetFromFileProvider(String fileName) {
-      this.file = fileName;
+      this.filePath = fileName;
    }
 
    @Override
    public ScoreSheet produce() throws Exception {
-      if (file == null) {
-         throw new IllegalStateException("Attempted to produce a scoresheet with a null file.");
+      if (filePath == null) {
+         throw new IllegalStateException("Attempted to produce a scoresheet with a null filePath.");
       }
 
       ScoreSheet scoreSheet = new ScoreSheet();
 
       // TODO: Remove
-      // try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+      // try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
       //    String line;
       //    while ((line = br.readLine()) != null) {
       //       SoccerMatch match = generateMatchFromInput(line);
@@ -36,8 +37,10 @@ public class ScoreSheetFromFileProvider implements IScoreSheetProvider {
       //    }
       // }
 
-      try (Stream<String> stream = Files.lines(Paths.get(file))) {
-         stream.forEach((s) -> scoreSheet.addMatch(generateMatchFromInput(s)));
+      if (new File(filePath).exists()) {
+         try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
+            stream.forEach((s) -> scoreSheet.addMatch(generateMatchFromInput(s)));
+         }
       }
 
       return scoreSheet;
@@ -56,15 +59,15 @@ public class ScoreSheetFromFileProvider implements IScoreSheetProvider {
       }
 
       String homeTeamName, awayTeamName;
-      Integer homeScore, awayScore;
+      Long homeScore, awayScore;
 
       String[] scores = matchStr.split(",");
 
-      homeScore = Integer.parseInt(scores[0].substring(scores[0].length()));
-      homeTeamName = scores[0].substring(0, scores[0].length() - 1);
+      homeScore = Long.parseLong(scores[0].substring(scores[0].lastIndexOf(' ') + 1));
+      homeTeamName = scores[0].substring(0, scores[0].lastIndexOf(' ')).trim();
 
-      awayScore = Integer.parseInt(scores[1].substring(scores[1].length()));
-      awayTeamName = scores[1].substring(0, scores[1].length() - 1);
+      awayScore = Long.parseLong(scores[1].substring(scores[1].lastIndexOf(' ') + 1));
+      awayTeamName = scores[1].substring(0, scores[1].lastIndexOf(' ')).trim();
 
       SoccerTeam homeTeam = new SoccerTeamFactory().getTeam(homeTeamName);
       SoccerTeam awayTeam = new SoccerTeamFactory().getTeam(awayTeamName);

@@ -5,9 +5,9 @@ import io.wesley.span.test.data.SoccerMatch;
 import io.wesley.span.test.data.SoccerTeam;
 
 public class PointsManager {
-   protected static final Integer WIN_POINTS = 3;
-   protected static final Integer DRAW_POINTS = 1;
-   protected static final Integer LOSS_POINTS = 0;
+   protected static final Long WIN_POINTS = 3L;
+   protected static final Long DRAW_POINTS = 1L;
+   protected static final Long LOSS_POINTS = 0L;
 
    protected final SoccerLeagueTable table;
 

@@ -42,7 +42,7 @@ public class SoccerLeagueTable {
     * @param soccerTeam
     * @param points
     */
-   public void addPoints(SoccerTeam soccerTeam, Integer points) {
+   public void addPoints(SoccerTeam soccerTeam, Long points) {
       if (LEAGUE_TABLE.containsKey(soccerTeam.getUuid().toString())) {
          LEAGUE_TABLE.get(soccerTeam.getUuid().toString()).addPoints(points);
       }
@@ -54,7 +54,7 @@ public class SoccerLeagueTable {
     * @param soccerTeam The team to retrieve the score for.
     * @return The team's score, or -1 if the team does not exist in the table.
     */
-   public Integer getScore(SoccerTeam soccerTeam) {
+   public Long getScore(SoccerTeam soccerTeam) {
       if (LEAGUE_TABLE.get(soccerTeam.getUuid().toString()) == null) {
          return null;
       }
@@ -63,6 +63,6 @@ public class SoccerLeagueTable {
    }
 
    public String exportData() {
-      return formatter.format(LEAGUE_TABLE);
+      return formatter.format(LEAGUE_TABLE).trim();
    }
 }

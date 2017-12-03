@@ -17,13 +17,13 @@ public class DefaultLeagueTableFormatter implements ILeagueTableFormatter {
          tableNodes.add(entry.getValue());
       }
 
-      Collections.sort(tableNodes);
+      tableNodes.sort(Collections.reverseOrder());
 
       int position = 1;
       StringBuilder sb = new StringBuilder();
 
       for (int i = 0; i<tableNodes.size(); i++) {
-         if (i > 1 && tableNodes.get(i-1).getPoints().compareTo(tableNodes.get(i).getPoints()) != 0) {
+         if (i > 0 && tableNodes.get(i-1).getPoints().compareTo(tableNodes.get(i).getPoints()) != 0) {
             position = i+1;
          }
 
@@ -39,7 +39,7 @@ public class DefaultLeagueTableFormatter implements ILeagueTableFormatter {
 
       sb.append(position);
       sb.append(". ");
-      sb.append(leagueTableNode.getSoccerTeam());
+      sb.append(leagueTableNode.getSoccerTeam().getTeamName());
       sb.append(", ");
       sb.append(leagueTableNode.getPoints());
       if (leagueTableNode.getPoints() == 1) {
