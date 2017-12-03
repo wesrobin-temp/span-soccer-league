@@ -1,7 +1,7 @@
-package business;
+package io.wesley.span.test.business;
 
-import data.SoccerMatch;
-import data.SoccerTeam;
+import io.wesley.span.test.data.SoccerMatch;
+import io.wesley.span.test.data.SoccerTeam;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -11,11 +11,11 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 
 public class TestMatchManager {
-   private DefaultSoccerMatchManager matchManager;
+   private SoccerMatchManager matchManager;
 
    @BeforeMethod
    public void beforeMethod() {
-      matchManager = spy(new DefaultSoccerMatchManager());
+      matchManager = spy(new SoccerMatchManager());
    }
 
    @AfterMethod

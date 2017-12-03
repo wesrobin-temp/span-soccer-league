@@ -1,10 +1,13 @@
-package application;
+package io.wesley.span.test.application;
 
-import data.SoccerTeam;
+import io.wesley.span.test.data.SoccerTeam;
+import io.wesley.span.test.data.table.LeagueTableNode;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
@@ -19,6 +22,8 @@ public class TestSoccerLeagueTable {
       testedClass = spy(new SoccerLeagueTable());
 
       team = mock(SoccerTeam.class);
+      UUID teamUUID = UUID.randomUUID();
+      when(team.getUuid()).thenReturn(teamUUID);
    }
 
    @AfterMethod
@@ -30,14 +35,14 @@ public class TestSoccerLeagueTable {
    public void addNewTeam_givenTeamNotInTable_addsTeamToTable() {
 
       // Pre-assertions
-      Assert.assertNull(testedClass.LEAGUE_TABLE.get(team));
+      Assert.assertNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 0);
 
       // Do the thing
       testedClass.addNewTeam(team);
 
       // Verify
-      Assert.assertNotNull(testedClass.LEAGUE_TABLE.get(team));
+      Assert.assertNotNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 1);
    }
 
@@ -46,19 +51,20 @@ public class TestSoccerLeagueTable {
       // Setup
       Integer points = 10;
       // Give the team some points, so that we make sure the .put(team, 0) method call isn't run
-      testedClass.LEAGUE_TABLE.put(team, points);
+      testedClass.LEAGUE_TABLE.put(team.getUuid().toString(), new LeagueTableNode(team));
+      testedClass.LEAGUE_TABLE.get(team.getUuid().toString()).addPoints(points);
 
       // Pre-assertions
-      Assert.assertNotNull(testedClass.LEAGUE_TABLE.get(team));
+      Assert.assertNotNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 1);
 
       // Do the thing
       testedClass.addNewTeam(team);
 
       // Verify
-      Assert.assertNotNull(testedClass.LEAGUE_TABLE.get(team));
+      Assert.assertNotNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 1);
-      Assert.assertEquals(testedClass.LEAGUE_TABLE.get(team), points);
+      Assert.assertEquals(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()).getPoints(), points);
    }
 
    @Test
@@ -66,44 +72,45 @@ public class TestSoccerLeagueTable {
       // Setup
       Integer points = 10;
       // Give the team some points, so that we make sure the .put(team, 0) method call isn't run
-      testedClass.LEAGUE_TABLE.put(team, points);
+      testedClass.LEAGUE_TABLE.put(team.getUuid().toString(), new LeagueTableNode(team));
+      testedClass.LEAGUE_TABLE.get(team.getUuid().toString()).addPoints(points);
 
       // Pre-assertions
-      Assert.assertNotNull(testedClass.LEAGUE_TABLE.get(team));
+      Assert.assertNotNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 1);
 
       // Do the thing
       testedClass.addNewTeam(null);
 
       // Verify
-      Assert.assertNotNull(testedClass.LEAGUE_TABLE.get(team));
+      Assert.assertNotNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 1);
-      Assert.assertEquals(testedClass.LEAGUE_TABLE.get(team), points);
+      Assert.assertEquals(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()).getPoints(), points);
    }
 
    @Test
    public void updateScore_givenTeamInTable_replacesScore() {
       // Setup
-      testedClass.LEAGUE_TABLE.put(team, 10);
+      testedClass.LEAGUE_TABLE.put(team.getUuid().toString(), new LeagueTableNode(team));
 
       // Do the thing
-      testedClass.updateScore(team, 15);
+      testedClass.addPoints(team, 15);
 
       // Verify
-      Assert.assertEquals(testedClass.LEAGUE_TABLE.get(team), new Integer(15));
+      Assert.assertEquals(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()).getPoints(), new Integer(15));
    }
 
    @Test
    public void updateScore_givenTeamNotInTable_doesNothing() {
       // Pre-assertions
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 0);
-      Assert.assertNull(testedClass.LEAGUE_TABLE.get(team));
+      Assert.assertNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
 
       // Do the thing
-      testedClass.updateScore(team, 15);
+      testedClass.addPoints(team, 15);
 
       // Verify
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 0);
-      Assert.assertNull(testedClass.LEAGUE_TABLE.get(team));
+      Assert.assertNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
    }
 }

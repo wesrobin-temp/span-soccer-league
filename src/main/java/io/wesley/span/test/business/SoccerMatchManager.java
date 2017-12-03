@@ -1,8 +1,8 @@
-package business;
+package io.wesley.span.test.business;
 
-import data.SoccerMatch;
+import io.wesley.span.test.data.SoccerMatch;
 
-public class DefaultSoccerMatchManager {
+public class SoccerMatchManager {
    public int getResult(SoccerMatch soccerMatch) {
       if (soccerMatch.getAwayTeamScore() == -1 || soccerMatch.getHomeTeamScore() == -1) {
          throw new IllegalStateException("No result set for the given Match.");

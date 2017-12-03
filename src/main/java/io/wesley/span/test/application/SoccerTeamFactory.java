@@ -1,6 +1,6 @@
-package application;
+package io.wesley.span.test.application;
 
-import data.SoccerTeam;
+import io.wesley.span.test.data.SoccerTeam;
 
 import java.util.HashMap;
 import java.util.Map;

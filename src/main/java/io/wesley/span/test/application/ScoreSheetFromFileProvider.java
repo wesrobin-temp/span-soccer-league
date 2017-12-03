@@ -1,8 +1,8 @@
-package application;
+package io.wesley.span.test.application;
 
-import data.ScoreSheet;
-import data.SoccerMatch;
-import data.SoccerTeam;
+import io.wesley.span.test.data.ScoreSheet;
+import io.wesley.span.test.data.SoccerMatch;
+import io.wesley.span.test.data.SoccerTeam;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

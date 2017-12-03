@@ -1,4 +1,4 @@
-package data;
+package io.wesley.span.test.data;
 
 import java.util.Objects;
 import java.util.UUID;

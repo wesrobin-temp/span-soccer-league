@@ -1,6 +1,6 @@
-package application;
+package io.wesley.span.test.application;
 
-import data.ScoreSheet;
+import io.wesley.span.test.data.ScoreSheet;
 
 public interface IScoreSheetProvider {
    /**
