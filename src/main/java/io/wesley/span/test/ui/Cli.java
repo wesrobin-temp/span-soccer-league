@@ -4,6 +4,7 @@ import io.wesley.span.test.application.IScoreSheetProvider;
 import io.wesley.span.test.application.ScoreSheetFromFileProvider;
 import org.apache.commons.cli.*;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 public class Cli {
@@ -30,6 +31,11 @@ public class Cli {
          }
 
          if (cmd.hasOption("f")) {
+            File checkFile = new File(cmd.getOptionValue("f"));
+            if (!checkFile.exists()) {
+               System.out.println("Unable to find the given file. Please use an absolute path to the file.");
+               System.exit(0);
+            }
             return new ScoreSheetFromFileProvider(cmd.getOptionValue("f"));
          } else if (cmd.hasOption("h")) {
             printHelp();

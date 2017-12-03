@@ -26,17 +26,6 @@ public class ScoreSheetFromFileProvider implements IScoreSheetProvider {
 
       ScoreSheet scoreSheet = new ScoreSheet();
 
-      // TODO: Remove
-      // try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-      //    String line;
-      //    while ((line = br.readLine()) != null) {
-      //       SoccerMatch match = generateMatchFromInput(line);
-      //       if (match != null) {
-      //          scoreSheet.addMatch(match);
-      //       }
-      //    }
-      // }
-
       if (new File(filePath).exists()) {
          try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
             stream.forEach((s) -> scoreSheet.addMatch(generateMatchFromInput(s)));
@@ -100,10 +89,6 @@ public class ScoreSheetFromFileProvider implements IScoreSheetProvider {
     * @return
     */
    private boolean verifyMatchInputString(String matchStr) {
-      // TODO: Remove
-//      Pattern pattern = Pattern.compile(MATCH_PATTERN);
-//
-//      return pattern.matcher(matchStr).matches();
       return matchStr.matches(MATCH_PATTERN);
    }
 }
