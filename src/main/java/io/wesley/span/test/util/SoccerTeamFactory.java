@@ -1,4 +1,4 @@
-package io.wesley.span.test.application;
+package io.wesley.span.test.util;
 
 import io.wesley.span.test.data.SoccerTeam;
 

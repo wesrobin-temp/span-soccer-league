@@ -1,7 +1,7 @@
 package io.wesley.span.test.ui;
 
-import io.wesley.span.test.application.IScoreSheetProvider;
-import io.wesley.span.test.application.SoccerLeagueTable;
+import io.wesley.span.test.util.IScoreSheetProvider;
+import io.wesley.span.test.util.SoccerLeagueTable;
 import io.wesley.span.test.business.DefaultLeagueTableFormatter;
 import io.wesley.span.test.business.PointsManager;
 import io.wesley.span.test.business.SoccerMatchManager;

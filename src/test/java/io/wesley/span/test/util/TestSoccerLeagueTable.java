@@ -1,4 +1,4 @@
-package io.wesley.span.test.application;
+package io.wesley.span.test.util;
 
 import io.wesley.span.test.business.ILeagueTableFormatter;
 import io.wesley.span.test.data.SoccerTeam;
@@ -91,7 +91,7 @@ public class TestSoccerLeagueTable {
    }
 
    @Test
-   public void updateScore_givenTeamInTable_replacesScore() {
+   public void addPoints_givenTeamInTable_replacesScore() {
       // Setup
       testedClass.LEAGUE_TABLE.put(team.getUuid().toString(), new LeagueTableNode(team));
 
@@ -103,7 +103,7 @@ public class TestSoccerLeagueTable {
    }
 
    @Test
-   public void updateScore_givenTeamNotInTable_doesNothing() {
+   public void addPoints_givenTeamNotInTable_doesNothing() {
       // Pre-assertions
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 0);
       Assert.assertNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
@@ -115,4 +115,32 @@ public class TestSoccerLeagueTable {
       Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 0);
       Assert.assertNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
    }
+
+   @Test
+   public void getScore_givenTeamInTable_returnsScore() {
+      // Setup
+      LeagueTableNode tempNode = new LeagueTableNode(team);
+      tempNode.addPoints(20L);
+      testedClass.LEAGUE_TABLE.put(team.getUuid().toString(), tempNode);
+
+      // Do the thing
+      Long actualScore = testedClass.getScore(team);
+
+      // Verify
+      Assert.assertEquals(actualScore, new Long(20));
+   }
+
+   @Test
+   public void getScore_givenTeamNotInTable_returnsNull() {
+      // Pre-assertions
+      Assert.assertEquals(testedClass.LEAGUE_TABLE.size(), 0);
+      Assert.assertNull(testedClass.LEAGUE_TABLE.get(team.getUuid().toString()));
+
+      // Do the thing
+      Long actualScore = testedClass.getScore(team);
+
+      // Verify
+      Assert.assertNull(actualScore);
+   }
+
 }

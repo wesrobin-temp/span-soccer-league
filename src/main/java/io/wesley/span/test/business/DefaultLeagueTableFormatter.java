@@ -31,7 +31,7 @@ public class DefaultLeagueTableFormatter implements ILeagueTableFormatter {
          sb.append(System.lineSeparator());
       }
 
-      return sb.toString();
+      return sb.toString().trim();
    }
 
    private String buildOutputLine(int position, LeagueTableNode leagueTableNode) {
@@ -48,6 +48,6 @@ public class DefaultLeagueTableFormatter implements ILeagueTableFormatter {
          sb.append(" pts");
       }
 
-      return  sb.toString();
+      return sb.toString();
    }
 }

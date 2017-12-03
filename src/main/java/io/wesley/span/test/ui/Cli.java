@@ -1,11 +1,10 @@
 package io.wesley.span.test.ui;
 
-import io.wesley.span.test.application.IScoreSheetProvider;
-import io.wesley.span.test.application.ScoreSheetFromFileProvider;
+import io.wesley.span.test.util.IScoreSheetProvider;
+import io.wesley.span.test.util.ScoreSheetFromFileProvider;
 import org.apache.commons.cli.*;
 
 import java.io.File;
-import java.util.logging.Logger;
 
 public class Cli {
    private String[] args;

@@ -10,7 +10,7 @@ import java.util.UUID;
  * Scores default to -1 and must be set if a result is to be calculated.
  */
 public class SoccerMatch {
-   private final UUID uuid;
+   private final UUID uuid = UUID.randomUUID();
    private final SoccerTeam homeTeam;
    private final SoccerTeam awayTeam;
 
@@ -24,7 +24,13 @@ public class SoccerMatch {
 
       this.homeTeam = homeTeam;
       this.awayTeam = awayTeam;
-      this.uuid = UUID.randomUUID();
+   }
+
+   public SoccerMatch(SoccerTeam homeTeam, SoccerTeam awayTeam, Long homeTeamScore, Long awayTeamScore) {
+      this.homeTeam = homeTeam;
+      this.awayTeam = awayTeam;
+      this.homeTeamScore = homeTeamScore;
+      this.awayTeamScore = awayTeamScore;
    }
 
    public UUID getUuid() {
