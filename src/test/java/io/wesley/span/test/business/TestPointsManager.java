@@ -1,6 +1,6 @@
 package io.wesley.span.test.business;
 
-import io.wesley.span.test.application.SoccerLeagueTable;
+import io.wesley.span.test.util.SoccerLeagueTable;
 import io.wesley.span.test.data.SoccerMatch;
 import io.wesley.span.test.data.SoccerTeam;
 import org.testng.Assert;

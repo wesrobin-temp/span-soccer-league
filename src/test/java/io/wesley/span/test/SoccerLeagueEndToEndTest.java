@@ -1,8 +1,8 @@
 package io.wesley.span.test;
 
-import io.wesley.span.test.application.IScoreSheetProvider;
-import io.wesley.span.test.application.ScoreSheetFromFileProvider;
-import io.wesley.span.test.application.SoccerLeagueTable;
+import io.wesley.span.test.util.IScoreSheetProvider;
+import io.wesley.span.test.util.ScoreSheetFromFileProvider;
+import io.wesley.span.test.util.SoccerLeagueTable;
 import io.wesley.span.test.business.DefaultLeagueTableFormatter;
 import io.wesley.span.test.business.PointsManager;
 import io.wesley.span.test.business.SoccerMatchManager;
@@ -19,12 +19,12 @@ import java.nio.file.Paths;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ITSoccerLeague {
+public class SoccerLeagueEndToEndTest {
    @DataProvider(name = "SoccerLeague")
    public Object[][] results() {
       return new Object[][]{{"happyday-soccer-results.txt", "happyday-expected.txt"}, {"large-values-soccer-results" +
             ".txt", "large-values-expected.txt"}, {"crazy-but-legal-names-soccer-results" +
-            ".txt", "crazy-but-legal-names-expected.txt"}};
+            ".txt", "crazy-but-legal-names-expected.txt"}, {"no-games.txt", "no-games.txt"}};
    }
 
 

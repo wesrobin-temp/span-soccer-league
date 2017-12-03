@@ -1,4 +1,4 @@
-package io.wesley.span.test.application;
+package io.wesley.span.test.util;
 
 import io.wesley.span.test.data.ScoreSheet;
 import io.wesley.span.test.data.SoccerMatch;
@@ -14,8 +14,8 @@ public class ScoreSheetFromFileProvider implements IScoreSheetProvider {
 
    private static final String MATCH_PATTERN = "[a-zA-z0-9 ]+ [0-9]+, ?[a-zA-z0-9 ]+ [0-9]+$";
 
-   public ScoreSheetFromFileProvider(String fileName) {
-      this.filePath = fileName;
+   public ScoreSheetFromFileProvider(String filePath) {
+      this.filePath = filePath;
    }
 
    @Override
@@ -61,12 +61,7 @@ public class ScoreSheetFromFileProvider implements IScoreSheetProvider {
       SoccerTeam homeTeam = new SoccerTeamFactory().getTeam(homeTeamName);
       SoccerTeam awayTeam = new SoccerTeamFactory().getTeam(awayTeamName);
 
-      SoccerMatch newMatch = new SoccerMatch(homeTeam, awayTeam);
-
-      newMatch.setHomeTeamScore(homeScore);
-      newMatch.setAwayTeamScore(awayScore);
-
-      return newMatch;
+      return new SoccerMatch(homeTeam, awayTeam, homeScore, awayScore);
    }
 
    /**
